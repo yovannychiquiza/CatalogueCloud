@@ -5,13 +5,13 @@
 
 <table class="table table-bordered">
     <tr>
-        <th>Course</th>
-        <th>Fee</th>
+        <th>Product</th>
+        <th>Price</th>
     </tr>
     @foreach (var item in Model.ShoppingCartItems)
     {
         <tr>
-            <td class="text-left">@item.Course.Title</td>
+            <td class="text-left">@item.Product.Title</td>
             <td class="text-right">@item.Amount</td>
         </tr>
     }

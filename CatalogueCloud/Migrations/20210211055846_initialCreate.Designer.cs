@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CatalogueCloud.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20210211002514_DatabaseSetup2")]
-    partial class DatabaseSetup2
+    [Migration("20210211055846_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,9 +39,9 @@ namespace CatalogueCloud.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("CatalogueCloud.Models.Course", b =>
+            modelBuilder.Entity("CatalogueCloud.Models.Product", b =>
                 {
-                    b.Property<int>("CourseId")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -52,26 +52,20 @@ namespace CatalogueCloud.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Fee")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsWeekendClassAvailable")
-                        .HasColumnType("bit");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isFreeThisWeek")
-                        .HasColumnType("bit");
-
-                    b.HasKey("CourseId");
+                    b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("CatalogueCloud.Models.ShoppingCartItem", b =>
@@ -84,7 +78,7 @@ namespace CatalogueCloud.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("CourseId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("ShoppingCartId")
@@ -92,15 +86,15 @@ namespace CatalogueCloud.Migrations
 
                     b.HasKey("ShoppingCartItemId");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ShoppingCartItems");
                 });
 
-            modelBuilder.Entity("CatalogueCloud.Models.Course", b =>
+            modelBuilder.Entity("CatalogueCloud.Models.Product", b =>
                 {
                     b.HasOne("CatalogueCloud.Models.Category", "Category")
-                        .WithMany("Courses")
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
@@ -108,16 +102,16 @@ namespace CatalogueCloud.Migrations
 
             modelBuilder.Entity("CatalogueCloud.Models.ShoppingCartItem", b =>
                 {
-                    b.HasOne("CatalogueCloud.Models.Course", "Course")
+                    b.HasOne("CatalogueCloud.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("ProductId");
 
-                    b.Navigation("Course");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("CatalogueCloud.Models.Category", b =>
                 {
-                    b.Navigation("Courses");
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

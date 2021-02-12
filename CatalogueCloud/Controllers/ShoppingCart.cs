@@ -10,12 +10,12 @@ namespace CatalogueCloud.Controllers
     public class ShoppingCartController : Controller
     {
 
-        private readonly ICourseRepository courseRepository;
+        private readonly IProductRepository productRepository;
         private readonly ShoppingCart shoppingCart;
 
-        public ShoppingCartController(ICourseRepository courseRepository, ShoppingCart shoppingCart)
+        public ShoppingCartController(IProductRepository productRepository, ShoppingCart shoppingCart)
         {
-            this.courseRepository = courseRepository;
+            this.productRepository = productRepository;
             this.shoppingCart = shoppingCart;
         }
 
@@ -26,16 +26,16 @@ namespace CatalogueCloud.Controllers
             return View(shoppingCart);
         }
 
-        public RedirectToActionResult AddToShoppingCart(int courseId)
+        public RedirectToActionResult AddToShoppingCart(int productId)
         {
-            var selectedCourse = courseRepository.GetCourseById(courseId);
-            shoppingCart.AddItemToCart(selectedCourse, selectedCourse.Fee);
+            var selectedProduct = productRepository.GetProductById(productId);
+            shoppingCart.AddItemToCart(selectedProduct, selectedProduct.Price);
             return RedirectToAction("Index");
         }
-        public RedirectToActionResult RemoveFromShoppingCart(int courseId)
+        public RedirectToActionResult RemoveFromShoppingCart(int productId)
         {
-            var selectedCourse = courseRepository.GetCourseById(courseId);
-            shoppingCart.RemoveItemFromCart(selectedCourse);
+            var selectedProduct = productRepository.GetProductById(productId);
+            shoppingCart.RemoveItemFromCart(selectedProduct);
             return RedirectToAction("Index");
         }
 

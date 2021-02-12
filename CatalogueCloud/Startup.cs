@@ -29,14 +29,17 @@ namespace CatalogueCloud
             options.UseSqlServer(Configuration.GetConnectionString("AppDBConnection")));
 
             services.AddScoped<ICategoryRepository, EFCategoryRepository>();
-            services.AddScoped<ICourseRepository, EFCourseRepository>();
+            services.AddScoped<IProductRepository, EFProductRepository>();
 
             services.AddScoped<ShoppingCart>(s => ShoppingCart.GetShoppingCart(s));
             services.AddHttpContextAccessor();
             services.AddSession();
 
             services.AddControllersWithViews();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -55,13 +58,9 @@ namespace CatalogueCloud
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapGet("/", async context =>
-                //{
-                //    await context.Response.WriteAsync("Hello World!");
-                //});
                 endpoints.MapControllerRoute(
                     name:"default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Product}/{action=List}/{id?}");
             });
         }
     }

@@ -32,10 +32,10 @@ namespace CatalogueCloud.Models
             return new ShoppingCart(context) { ShoppingCartId = ShoppingcartId };
         }
 
-        public void AddItemToCart(Course course, decimal amount)
+        public void AddItemToCart(Product product, decimal amount)
         {
             var ShoppingCartItem = appDBContext.ShoppingCartItems.SingleOrDefault(
-                s => s.Course.CourseId == course.CourseId
+                s => s.Product.ProductId == product.ProductId
                 &&
                 s.ShoppingCartId == this.ShoppingCartId
                 );
@@ -44,7 +44,7 @@ namespace CatalogueCloud.Models
                 ShoppingCartItem = new ShoppingCartItem
                 {
                     ShoppingCartId = this.ShoppingCartId,
-                    Course = course,
+                    Product = product,
                     Amount = amount
                 };
                 appDBContext.ShoppingCartItems.Add(ShoppingCartItem);
@@ -52,10 +52,10 @@ namespace CatalogueCloud.Models
             appDBContext.SaveChanges();
         }
 
-        public void RemoveItemFromCart(Course course)
+        public void RemoveItemFromCart(Product product)
         {
             var ShoppingCartItem = appDBContext.ShoppingCartItems.SingleOrDefault(
-                s => s.Course.CourseId == course.CourseId
+                s => s.Product.ProductId == product.ProductId
                 &&
                 s.ShoppingCartId == this.ShoppingCartId
                 );
@@ -70,7 +70,7 @@ namespace CatalogueCloud.Models
         {
             this.ShoppingCartItems = appDBContext.ShoppingCartItems.Where(
                 c => c.ShoppingCartId == this.ShoppingCartId
-                ).Include(cart => cart.Course).ToList();
+                ).Include(cart => cart.Product).ToList();
             return this.ShoppingCartItems;
         }
 

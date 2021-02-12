@@ -8,7 +8,7 @@ namespace CatalogueCloud.Models
     public class ShoppingCartItem
     {
         public int ShoppingCartItemId { get; set; }
-        public Course Course { get; set; }
+        public Product Product { get; set; }
         public decimal Amount { get; set; }
         public string ShoppingCartId { get; set; }
 

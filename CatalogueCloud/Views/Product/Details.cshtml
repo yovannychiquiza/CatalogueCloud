@@ -1,10 +1,10 @@
-﻿@model Course
+﻿@model Product
 
 
 <div class="card mb-3" style="max-width: 540px;">
     <div class="row no-gutters">
         <div class="col-md-4">
-            <img src="@Model.ImageUrl" class="card-img" alt="@Model.Title">
+            <img src="~/images/@Model.ImageUrl" class="card-img" alt="@Model.Title">
         </div>
         <div class="col-md-8">
             <div class="card-body">
@@ -13,10 +13,10 @@
                     <small class="text-muted">@Model.Category.Name</small>
                 </p>
                 <p class="card-text">@Model.Description</p>
-                <p class="card-text">@Model.Fee</p>
+                <p class="card-text">@Model.Price</p>
                 <a asp-controller="ShoppingCart"
                    asp-action="AddToShoppingCart"
-                   asp-route-courseId=@Model.CourseId
+                   asp-route-productId=@Model.ProductId
                    class="btn btn-primary">Add to Cart</a>
             </div>
         </div>

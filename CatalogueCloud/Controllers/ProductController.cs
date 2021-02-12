@@ -8,38 +8,34 @@ using CatalogueCloud.ViewModels;
 
 namespace CatalogueCloud.Controllers
 {
-    public class CourseController : Controller
+    public class ProductController : Controller
     {
-        private readonly ICourseRepository courseRepository;
+        private readonly IProductRepository productRepository;
         private readonly ICategoryRepository categoryRepository;
 
-        public CourseController(ICourseRepository courseRepository,
+        public ProductController(IProductRepository productRepository,
             ICategoryRepository categoryRepository
             )
         {
-            this.courseRepository = courseRepository;
+            this.productRepository = productRepository;
             this.categoryRepository = categoryRepository;
         }
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
         public ViewResult List()
         {
-            CourseListVM courseListVM = new CourseListVM()
+            ProductListVM productListVM = new ProductListVM()
             {
-                Courses = courseRepository.AllCourses,
+                Products = productRepository.AllProducts,
                 SelectedCategoryName = categoryRepository.AllCategories.ToList()[0].Name
             };
 
-            return View(courseListVM);
+            return View(productListVM);
         }
 
 
         public ViewResult Details(int id)
         {
-            var course = courseRepository.GetCourseById(id);
-            return View(course);
+            var product = productRepository.GetProductById(id);
+            return View(product);
         }
 
     }

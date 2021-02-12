@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace CatalogueCloud.Models
 {
-    public class EFCourseRepository: ICourseRepository
+    public class EFProductRepository: IProductRepository
     {
         private readonly AppDBContext appDBContext;
-        public EFCourseRepository(AppDBContext appDBContext)
+        public EFProductRepository(AppDBContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }
 
-        public IEnumerable<Course> AllCourses
+        public IEnumerable<Product> AllProducts
         {
             get
             {
-                return appDBContext.Courses.Include(c => c.Category);
+                return appDBContext.Products.Include(c => c.Category);
             }
         }
 
-        public IEnumerable<Course> FreeCoursesOfTheWeek => throw new NotImplementedException();
+        public IEnumerable<Product> FreeProductsOfTheWeek => throw new NotImplementedException();
 
-        public Course GetCourseById(int coueseId)
+        public Product GetProductById(int coueseId)
         {
-            return appDBContext.Courses.Include(c => c.Category).FirstOrDefault(c => c.CourseId == coueseId);   
+            return appDBContext.Products.Include(c => c.Category).FirstOrDefault(c => c.ProductId == coueseId);   
         }
     }
 }

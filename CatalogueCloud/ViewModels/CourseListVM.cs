@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CatalogueCloud.ViewModels
 {
-    public class CourseListVM
+    public class ProductListVM
     {
-        public IEnumerable<Course> Courses { get; set; }
+        public IEnumerable<Product> Products { get; set; }
         public string SelectedCategoryName { get; set; }
     }
 }

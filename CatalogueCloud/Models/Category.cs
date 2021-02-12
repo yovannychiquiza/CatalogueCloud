@@ -8,7 +8,7 @@ namespace CatalogueCloud.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public List<Course> Courses { get; set; }
+        public List<Product> Products { get; set; }
 
     }
 }
